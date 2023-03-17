@@ -44,11 +44,12 @@ export default function LoginForm() {
   })
 
   const recuperarContraseña = () => {
-    Toast.show({
-      type: "error",
-      position: "bottom",
-      text1: "Aun no funciona Crack, Dale calma"
-    })
+    // Toast.show({
+    //   type: "error",
+    //   position: "bottom",
+    //   text1: "Aun no funciona Crack, Dale calma"
+    // })
+    navigation.navigate("recuperar");
   }
   const registrarse = () => {
     navigation.navigate("registerS");
