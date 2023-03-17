@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import colores from './components/colores'
 import ProfileUser from './components/account/ProfileUser'
 import Loading from './components/componentsHome/Loading'
+import OptionsUser from './components/account/OptionsUser'
 
 export default function ProfileScreen() {
 
@@ -21,6 +22,7 @@ export default function ProfileScreen() {
   return (
     <View>
       <ProfileUser setVisibleLoad={setVisibleLoad} setTextLoad = {setTextLoad}/>
+      <OptionsUser/>
       <Button title="Cerrar " onPress={logout} buttonStyle={styles.btn} titleStyle={styles.textBtn}/>
       <Loading visible={visibleLoad} text={textLoad} />
 
