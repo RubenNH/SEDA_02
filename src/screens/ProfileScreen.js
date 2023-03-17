@@ -5,6 +5,7 @@ import { getAuth , signOut } from "firebase/auth"
 import { useNavigation } from '@react-navigation/native'
 import colores from './components/colores'
 import ProfileUser from './components/account/ProfileUser'
+import Loading from './components/componentsHome/Loading'
 
 export default function ProfileScreen() {
 
@@ -21,6 +22,7 @@ export default function ProfileScreen() {
     <View>
       <ProfileUser setVisibleLoad={setVisibleLoad} setTextLoad = {setTextLoad}/>
       <Button title="Cerrar " onPress={logout} buttonStyle={styles.btn} titleStyle={styles.textBtn}/>
+      <Loading visible={visibleLoad} text={textLoad} />
 
     </View>
   )
