@@ -20,10 +20,9 @@ public class Maqueta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(nullable = false)
     private String nombrePiso;
-    @Column(nullable = false)
-    private long electrodomestico_Id;
 
     @OneToMany(mappedBy = "maqueta")
     @JsonIgnore

@@ -1,4 +1,4 @@
-package mx.edu.utez.seda.model.electrodomesticos;
+package mx.edu.utez.seda.model.sensors;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,17 +12,17 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
-@Table(name = "electrodomestico")
+@Table(name = "sensores")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Electrodomestico {
+public class Sensores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idElectro;
+    private long idSensor;
     @Column(nullable = false,length = 50)
-    private String nombreElectrodomestico;
+    private String nombreSensor;
     @Column(nullable = false)
     private boolean status;
 
@@ -32,5 +32,6 @@ public class Electrodomestico {
     @ManyToOne
     @JoinColumn(name = "maqueta_id",nullable = false)
     private Maqueta maqueta;
+
 
 }

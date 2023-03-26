@@ -16,13 +16,11 @@ import java.util.List;
 public class MaquetaDto {
     private long id;
     private String nombrePiso;
-    private long electrodomestico_Id;
     List<Electrodomestico> electrodomesticos;
     public Maqueta getPisos(){
         return new Maqueta(
             getId(),
                 getNombrePiso(),
-                getElectrodomestico_Id(),
                 electrodomesticos
         );
     }
