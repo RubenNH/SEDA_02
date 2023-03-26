@@ -7,8 +7,11 @@ import { LogBox } from "react-native";
 import { initFirebase } from "./utils/Firebase";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Formulario from './src/screens/components/componenteListHome/Formulario';
+import axios from 'axios';
+
 LogBox.ignoreAllLogs();
 export default function App() {
+  
   return (
     <>
       <NavigationContainer>

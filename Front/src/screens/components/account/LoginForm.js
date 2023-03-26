@@ -32,7 +32,6 @@ export default function LoginForm() {
         await signInWithEmailAndPassword(
           auth, formValue.email, formValue.password
         );
-        navigation.navigate("index");
       } catch (error) {
         Toast.show({
           type: "error",

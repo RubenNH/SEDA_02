@@ -1,12 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function RecuperarScreen() {
-  return (
-    <View>
-      <Text>RecuperarScreen</Text>
-    </View>
-  )
-}
+  const [data, setData] = useState(null);
 
-const styles = StyleSheet.create({})
+  useEffect(() => {
+    axios.get('http://localhost:8080/api-seda/piso/1')
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+  if (!data) {
+    return <></>;
+  }
+
+  return (
+    <div></div>
+  );
+}

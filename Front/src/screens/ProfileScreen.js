@@ -15,8 +15,8 @@ export default function ProfileScreen() {
   const logout =  async() => {
     const auth = getAuth();
     await signOut(auth);
-    console.log("CERRO SESION");
-    navigation.navigate("index")
+    console.log("CERRO SESION CORRECTAMENTE");
+    navigation.navigate("Home")
   }
   return (
     <View>
