@@ -14,25 +14,29 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    padding: 20,
     backgroundColor: '#fff',
-    borderRadius: 10,
+    borderRadius: 20,
     shadowColor: '#000',
+    width: '90%',
+    height:'10%',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.5,
     shadowRadius: 3.84,
     elevation: 5,
+    margin: "5%",
+  
   },
   image: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
+    width: '9%',
+    height: '150%',
+    marginRight: 3,
   },
   temperature: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
   },
 });

@@ -58,9 +58,16 @@ export default function LoginForm() {
   return (
     <>
       <Image
-        style={{ width: '100%', height: '40%', marginBottom: 15 }}
-        source={require("./../../../../assets/imgs/img_backround_login.png")}
+        style={{ width: '100%', height: '40%', marginBottom: 15, }}
+        source={require("./../../../../assets/imgs/seda.png")}
       />
+      <>
+      {/* <Image
+        style={{ width: '46.7%', height: '25%', position: 'absolute', }}
+        source={require("./../../../../assets/imgs/seda_icon.png")}
+        
+      /> */}
+      </>
       <View style={styles.viewContent}>
         <View style={styles.textos}>
         <Text style={styles.title1}>Hola!</Text>

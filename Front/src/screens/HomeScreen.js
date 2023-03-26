@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Input, Icon, Button } from "react-native-elements";
 import React from 'react'
 import List from './components/List';
 import colores from './components/colores';
 import Banner from './components/componentsHome/Banner';
+import Home1 from './components/componenteListHome/Home1';
 export default function HomeScreen() {
   const generateData = () => {
     const data = [];
@@ -21,8 +23,12 @@ export default function HomeScreen() {
   const data = generateData();
 
   return (
-    
-    <View style={styles.conatiner}>
+   <>
+     <Image
+        style={{ width: '100%', height: 100, marginBottom: 15, }}
+        source={require("./../../assets/imgs/img_backround_login.png")}
+      />
+     {/* <View style={styles.conatiner}>
       <Banner
         imageSource={require('./../../assets/imgs/planta.png')}
         temperature={24}
@@ -30,23 +36,30 @@ export default function HomeScreen() {
        <View style={styles.containerBotones}>
        <List data={data} />
        </View>
-    </View>
+    </View> */}
+    <Home1/>
+   </>
   )
 }
 
 const styles = StyleSheet.create({
     conatiner:{
-      flex: 1,
-      alignContent: 'center',
-      justifyContent: 'center',
-      margin: '4%'
+      margin: '2%'
     },
     containerBotones:{
       height: '60%',
       width: '100%',
       backgroundColor: colores.AZUL,
-      borderRadius: 10,
+      borderRadius: '16',
       alignItems: 'center',
       justifyContent: 'center',
-    }
+    },
+    btnContainer: {
+      marginTop: 20,
+      width: "95%",
+    },
+    btn: {
+      backgroundColor: colores.AZUL,
+    },
+    
 })

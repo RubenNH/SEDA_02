@@ -55,12 +55,12 @@ export default function RegisterForm() {
     }
     return (
         <>
-            
-            <View style={styles.viewContent}>
             <Image
-                style={styles.backgroundImage}
-                source={require("./../../../../assets/imgs/img_backround_login.png")}
+                style={styles.img}
+                source={require("./../../../../assets/imgs/seda.png")}
             />
+            <View style={styles.viewContent}>
+                <Text style={styles.title}>Registrate y conectate con tu Hogar!!</Text>
                 <Input containerStyle={styles.input} placeholder='Correo electronico'
                     rightIcon={<Icon type='material-community' name='at' iconStyle={styles.icon} />}
                     onChangeText={text => formik.setFieldValue("email", text)} errorMessage={formik.errors.email} 
@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
     viewContent: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
+        marginTop: "10%",
+        zIndex: -2
 
     },
     input: {
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         color: "#c1c1c1"
     },
     btnContainer: {
-        marginTop: 20,
+        marginTop: "10%",
         width: "95%",
         borderRadius: 15
     },
@@ -110,5 +111,14 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 200,
         resizeMode: 'contain',
+    },
+    title:{
+        fontSize: 20,
+        color: colores.AZUL,
+        fontWeight: "bold",
+        letterSpacing: 0.5
+    },
+    img:{
+        width: '100%', height: 300
     }
 })
