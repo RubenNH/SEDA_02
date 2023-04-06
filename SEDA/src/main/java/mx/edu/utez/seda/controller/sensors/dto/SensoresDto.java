@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mx.edu.utez.seda.model.electrodomesticos.Electrodomestico;
 import mx.edu.utez.seda.model.maqueta.Maqueta;
+import mx.edu.utez.seda.model.registrosSensores.RegistrosSensores;
 import mx.edu.utez.seda.model.sensors.Sensores;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +22,8 @@ public class SensoresDto {
     private boolean status;
     private Date HoraDeUso;
     private Maqueta maqueta;
+    List<RegistrosSensores> registrosS;
+
 
     public Sensores getSensores(){
         return new Sensores(
@@ -27,7 +31,8 @@ public class SensoresDto {
                 getNombreSensor(),
                 isStatus(),
                 getHoraDeUso(),
-                getMaqueta()
+                getMaqueta(),
+                registrosS
         );
     }
 }

@@ -1,7 +1,8 @@
-package mx.edu.utez.seda.services.sensors;
+package mx.edu.utez.seda.services.registrosSensorService;
 
-import mx.edu.utez.seda.model.sensors.Sensores;
-import mx.edu.utez.seda.model.sensors.SensoresRepository;
+
+import mx.edu.utez.seda.model.registrosSensores.RegistroaSensorRepo;
+import mx.edu.utez.seda.model.registrosSensores.RegistrosSensores;
 import mx.edu.utez.seda.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,12 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class SensoresService {
+public class RegistrosSensorService {
     @Autowired
-    private SensoresRepository repository;
+    private RegistroaSensorRepo repository;
 
     @Transactional(readOnly = true)
-    public Response<List<Sensores>>getAll(){
+    public Response<List<RegistrosSensores>>getAll(){
         return new Response<>(
                 this.repository.findAll(),
                 false,
@@ -28,7 +29,7 @@ public class SensoresService {
     }
 
     @Transactional(readOnly = true)
-    public  Response<Sensores>getOne(Long id){
+    public  Response<RegistrosSensores>getOne(Long id){
         if(this.repository.existsById(id)){
             return new Response<>(
                     this.repository.findById(id).get(),
@@ -46,17 +47,9 @@ public class SensoresService {
     }
 
     @Transactional(rollbackFor = {SQLException.class})
-    public Response<Sensores> insert(Sensores sensores){
-        Optional<Sensores> exists=this.repository.findByNombreSensor(sensores.getNombreSensor());
-        if (exists.isPresent())
-            return new Response<>(
-                    null,
-                    true,
-                    400,
-                    "El sensor ya se registro anteriormente"
-            );
+    public Response<RegistrosSensores> insert(RegistrosSensores reSensores){
         return new Response<>(
-                this.repository.saveAndFlush(sensores),
+                this.repository.saveAndFlush(reSensores),
                 false,
                 200,
                 "OK"
@@ -64,10 +57,10 @@ public class SensoresService {
     }
 
     @Transactional(rollbackFor = {SQLException.class})
-    public Response<Sensores> update(Sensores sensores){
-        if(this.repository.existsById(sensores.getIdSensor())){
+    public Response<RegistrosSensores> update(RegistrosSensores reSensores){
+        if(this.repository.existsById(reSensores.getIdRSensor())){
             return new Response<>(
-                    this.repository.saveAndFlush(sensores),
+                    this.repository.saveAndFlush(reSensores),
                     false,
                     200,
                     "OK"
@@ -82,7 +75,7 @@ public class SensoresService {
     }
 
     @Transactional(rollbackFor = {SQLException.class})
-    public Response<Sensores> delete(Long id){
+    public Response<RegistrosSensores> delete(Long id){
         if(this.repository.existsById(id)){
             this.repository.deleteById(id);
             return new Response<>(

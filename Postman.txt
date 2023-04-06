@@ -1,0 +1,127 @@
+Maqueta
+
+http://localhost:8080/api-seda/piso/
+
+Consulta obt
+
+{
+    "id": 1,
+    "nombrePiso": "piso one"
+}
+
+
+insert
+
+{
+    "nombrePiso": "piso one"
+}
+
+
+
+
+Electrodomesticos
+
+http://localhost:8080/api-seda/elect/
+
+Consulta obt
+
+{
+   "idElectro": 1,
+   "nombreElectrodomestico": "foco",
+   "status": true,
+   "maqueta": {
+        "id": 1,
+        "nombrePiso": "piso one"
+        },
+   "horaDeUso": "2023-04-06T16:26:00.000+00:00"
+}
+
+
+Insert [Primero debe de haber un piso ya agregado]
+
+{
+   "nombreElectrodomestico": "Baño",
+   "status": true,
+   "maqueta": {
+        "id": 1
+   }
+}
+
+
+
+Sensores
+
+http://localhost:8080/api-seda/sensor/
+
+Consulta obt
+
+{
+    "idSensor": 1,
+    "nombreSensor": "humedad",
+    "status": true,
+    "maqueta": {
+        "id": 1,
+        "nombrePiso": "piso one"
+     },
+     "horaDeUso": "2023-04-06T16:25:58.000+00:00"
+}
+
+Insert
+
+{
+    "nombreSensor": "Luz",
+    "status": true,
+    "maqueta": {
+        "id": 1
+     }
+}
+
+
+
+Registros electrodomesticos
+
+http://localhost:8080/api-seda/reg-elect/
+
+Consulta obt 
+
+{
+   "idRegistroE": 1,
+   "valorElectrico": "112",
+   "electrodomesticos": {
+      "idElectro": 1,
+      "nombreElectrodomestico": "foco",
+      "status": true,
+      "maqueta": {
+         "id": 1,
+         "nombrePiso": "piso one"
+      },
+      "horaDeUso": "2023-04-06T16:26:00.000+00:00"
+   },
+   "horaDeUso": "2023-04-06T18:28:11.000+00:00"
+}
+
+
+Insert
+
+{
+    "valorElectrico": "112",
+    "electrodomesticos": {
+        "idElectro": 1
+    }
+}
+
+
+
+
+Registros de Sensores
+
+http://localhost:8080/api-seda/reg-sensor/
+
+Insert
+
+{
+    "valorSensor": "300",
+    "sensores": {
+        "idSensor": 1
+    }
+}

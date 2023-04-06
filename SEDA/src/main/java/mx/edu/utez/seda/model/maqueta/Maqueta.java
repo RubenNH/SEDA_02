@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mx.edu.utez.seda.model.electrodomesticos.Electrodomestico;
+import mx.edu.utez.seda.model.sensors.Sensores;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,5 +28,9 @@ public class Maqueta {
     @OneToMany(mappedBy = "maqueta")
     @JsonIgnore
     private List<Electrodomestico> electrodomesticos;
+
+    @OneToMany(mappedBy = "maqueta")
+    @JsonIgnore
+    private List<Sensores> sensores;
 
 }
