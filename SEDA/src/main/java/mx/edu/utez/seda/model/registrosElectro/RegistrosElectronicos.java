@@ -25,7 +25,7 @@ public class RegistrosElectronicos {
     private long idRegistroE;
 
     @Column(nullable = false)
-    private String valorElectrico;
+    private Boolean status;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date HoraDeUso;

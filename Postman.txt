@@ -1,3 +1,15 @@
+
+INSERT INTO `seda`.`maqueta` (`id`, `nombre_piso`) VALUES ('1', 'piso one');
+INSERT INTO `seda`.`maqueta` (`nombre_piso`) VALUES ('piso two');
+INSERT INTO `seda`.`sensores` (`id_sensor`, `nombre_sensor`, `status`, `maqueta_id`) VALUES ('1', 'humedad', b'1', '1');
+INSERT INTO `seda`.`electrodomestico` (`id_electro`, `nombre_electrodomestico`, `status`, `maqueta_id`) VALUES ('1', 'foco', b'1', '1');
+INSERT INTO `seda`.`electrodomestico` (`id_electro`, `nombre_electrodomestico`, `status`, `maqueta_id`) VALUES ('2', 'Ventilador', b'1', '2');
+INSERT INTO `seda`.`registros_sensores` (`idrsensor`, `valor_sensor`, `sensor_id`) VALUES ('1', '1202', '1');
+INSERT INTO `seda`.`registros_electronicos` (`status`, `electrodomestico_id`) VALUES (b'1', '1');
+INSERT INTO `seda`.`registros_electronicos` (`status`, `electrodomestico_id`) VALUES (b'0', '2');
+
+
+
 Maqueta
 
 http://localhost:8080/api-seda/piso/
@@ -125,3 +137,5 @@ Insert
         "idSensor": 1
     }
 }
+
+

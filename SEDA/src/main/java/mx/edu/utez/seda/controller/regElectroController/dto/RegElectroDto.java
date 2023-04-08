@@ -19,14 +19,14 @@ import java.util.Date;
 @Getter
 public class RegElectroDto {
     private long idRegistroE;
-    private String valorElectrico;
+    private Boolean status;
     private Date HoraDeUso;
     private Electrodomestico electrodomesticos;
 
     public RegistrosElectronicos getRegistrosElectronicos(){
         return new RegistrosElectronicos(
                 getIdRegistroE(),
-                getValorElectrico(),
+                getStatus(),
                 getHoraDeUso(),
                 getElectrodomesticos()
         );
