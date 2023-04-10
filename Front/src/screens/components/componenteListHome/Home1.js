@@ -1,82 +1,130 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, Switch } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Formulario from './Formulario';
 import Banner from '../componentsHome/Banner';
 import colores from '../colores';
+import axios from 'axios';
+
+
 const Home1 = () => {
   const [items, setItems] = useState([]);
-  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
-  const agregarItem = (item) => {
-    const idExistente = items.find(i => i.id === item.id);
-    if (idExistente) {
-      console.log(`El elemento con ID ${item.id} ya existe.`);
-      return;
+
+  const Traerelectronicos = async () => {
+    try {
+      const response = await axios.get('http://192.168.100.5:8080/api-seda/elect/');
+      setItems(response.data.data);
+    } catch (error) {
+      console.error(error);
     }
-    setItems([...items, item]);
-    setMostrarFormulario(false);
   };
 
-  const cambiarEstado = (id) => {
-    const nuevosItems = [...items];
-    const index = nuevosItems.findIndex((item) => item.id === id);
-    nuevosItems[index].encendido = !nuevosItems[index].encendido;
-    setItems(nuevosItems);
-    console.log(`El elemento con ID ${id} cambió a ${nuevosItems[index].encendido ? 'encendido' : 'apagado'}`);
+  const GuardarUsoElectro = async (newItem) => {
+    try {
+      const response = await axios.post('http://192.168.100.5:8080/api-seda/reg-elect/', {
+        status: newItem.status,
+        horaDeUso: new Date(),
+        electrodomesticos: {
+          idElectro: newItem.idElectro
+        }
+      });
+      
+      console.log('reg saved successfully:', response.data);
+      setShowForm(false);
+    } catch (error) {
+      console.error('Error saving reg:', error);
+    }
+  };
+
+  const cambiarEstadoElectronicos = async (id, status) => {
+    try {
+      const response = await axios.put(`http://192.168.100.5:8080/api-seda/elect/${id}`, {
+        status: status
+      });
+      console.log('Item status updated successfully:', response.data);
+    } catch (error) {
+      console.error('Error updating item status:', error);
+    }
+  }
+  useEffect(() => {
+    Traerelectronicos();
+  }, []);
+
+  const addItem = async (newItem) => {
+
+    try {
+      const response = await axios.post('http://192.168.100.5:8080/api-seda/elect/', {
+        nombreElectrodomestico: newItem.nombre,
+        status: newItem.encendido,
+        maqueta: {
+          id: newItem.piso
+        }
+      });
+      console.log('Item saved successfully:', response.data);
+      setShowForm(false);
+      Traerelectronicos();
+    } catch (error) {
+      console.error('Error saving item:', error);
+    }
+    setShowForm(false);
+
+  };
+
+  const toggleItemState = (id) => {
+    const newItems = items.map((item) => {
+      if (item.idElectro === id) {
+        item.status = !item.status;
+        GuardarUsoElectro(item);
+        //cambiarEstadoElectronicos(item.idElectro, item.status)
+        console.log(`Item with ID ${id} is now ${item.status ? 'on' : 'off'}`);
+      }
+      return item;
+    });
+    Traerelectronicos();
   };
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
       <Ionicons
-        
-        name={item.encendido ? 'md-bulb' : 'md-bulb-outline'}
+        name={item.status ? 'md-bulb' : 'md-bulb-outline'}
         size={32}
-        color={item.encendido ? '#FDB813' : '#CCCCCC'}
+        color={item.status ? '#FDB813' : '#CCCCCC'}
         onPress={() => {
-          console.log("Botón presionado");
-          cambiarEstado(item.id)}}
+          console.log("Button pressed");
+          toggleItemState(item.idElectro);
+        }}
       />
       <View style={styles.info}>
         <Text style={styles.label}>ID: </Text>
-        <Text style={styles.valor}>{item.id}</Text>
-        <Text style={styles.label}> Nombre: </Text>
-        <Text style={styles.valor}>{item.nombre}</Text>
-        <Text style={styles.label}> Piso: </Text>
-        <Text style={styles.valor}> {item.piso} </Text>
+        <Text style={styles.value}>{item.idElectro}</Text>
+        <Text style={styles.label}> Name: </Text>
+        <Text style={styles.value}>{item.nombreElectrodomestico}</Text>
+        <Text style={styles.label}> Floor: </Text>
+        <Text style={styles.value}> {item.maqueta.nombrePiso} </Text>
       </View>
-      <Switch
-        value={item.encendido}
-        onValueChange={() => cambiarEstado(item.id)}
-      />
+      <Switch value={item.status} onValueChange={() => toggleItemState(item.idElectro)} />
     </View>
   );
-          
-  const itemsOrdenados = items.sort((a, b) => a.piso - b.piso);
+
+  const sortedItems = items.sort((a, b) => a.piso - b.piso);
 
   return (
     <View style={styles.container}>
-      <Banner
-        imageSource={require('./../../../../assets/imgs/planta.png')}
-        temperature={24}
-      />
+      <Banner imageSource={require('./../../../../assets/imgs/planta.png')} temperature={24} />
       <FlatList
-        data={itemsOrdenados}
+        data={sortedItems}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.idElectro.toString()}
         ListHeaderComponent={
           <View style={styles.header}>
-            <Text style={styles.titulo}>Electrodomesticos</Text>
-            <Ionicons
-              name="md-add-circle"
-              size={35}
-              color="#007AFF"
-              onPress={() => setMostrarFormulario(true)}
-            />
+            <Text style={styles.title}>Electrodomesticos</Text>
+            <Ionicons name="md-add-circle" size={35} color="#007AFF" onPress={() => setShowForm(true)} />
           </View>
         }
       />
-      {mostrarFormulario && <Formulario onGuardar={agregarItem} />}
+      {showForm && <Formulario onGuardar={addItem} />}
     </View>
   );
 };
@@ -91,10 +139,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 10,
   },
-  titulo: {
+  title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: colores.AZUL,
   },
   item: {
     flexDirection: 'row',

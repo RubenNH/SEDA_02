@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Switch, Button, StyleSheet } from 'react-native';
+import axios from 'axios';
+
 
 const Formulario = ({ onGuardar }) => {
-  const [id, setId] = useState('');
   const [nombre, setNombre] = useState('');
   const [piso, setPiso] = useState('');
   const [encendido, setEncendido] = useState(true);
 
   const guardar = () => {
-    // Verificar si algún campo está vacío
-  if (id.trim() === '' || nombre.trim() === '' || piso.trim() === '') {
-    alert('Por favor, completa todos los campos');
-    return;
-  }
-    onGuardar({
-      id,
-      nombre,
-      piso,
-      encendido
-    });
+    if (!nombre || !piso) {
+      alert('Por favor, completa todos los campos');
+      return;
+    }
 
-    setId('');
+    onGuardar({nombre, piso, encendido });
     setNombre('');
     setPiso('');
     setEncendido(true);
@@ -28,12 +22,6 @@ const Formulario = ({ onGuardar }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>ID</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={setId}
-        value={id}
-      />
       <Text style={styles.label}>Nombre</Text>
       <TextInput
         style={styles.input}
@@ -55,7 +43,6 @@ const Formulario = ({ onGuardar }) => {
         title="Guardar"
         onPress={guardar}
       />
-      
     </View>
   );
 };

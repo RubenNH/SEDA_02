@@ -98,7 +98,7 @@ Consulta obt
 
 {
    "idRegistroE": 1,
-   "valorElectrico": "112",
+   "status": "true",
    "electrodomesticos": {
       "idElectro": 1,
       "nombreElectrodomestico": "foco",
@@ -116,7 +116,7 @@ Consulta obt
 Insert
 
 {
-    "valorElectrico": "112",
+    "status": true,
     "electrodomesticos": {
         "idElectro": 1
     }

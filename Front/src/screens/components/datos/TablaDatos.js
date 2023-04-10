@@ -6,19 +6,25 @@ import axios from 'axios';
 export default function TablaDatos() {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = async () => {
     try {
       const response = await axios.get('http://192.168.100.5:8080/api-seda/reg-elect/');
-      console.log(response.data.data); // log the data array
       setData(response.data.data);
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // Call the loadData function every 10 seconds
+  // const loadData = () => {
+  //   fetchData();
+  // };
+  
+  // //setInterval(loadData, 5000);
 
   const tableHead = ['ID', 'Electrodomestico', 'Estado', 'Fecha/Hora', 'Piso'];
   const tableData = data.map((item) => [item.idRegistroE, item.electrodomesticos.nombreElectrodomestico, item.status ? "turn up" : "turn off",, item.horaDeUso, item.electrodomesticos.maqueta.nombrePiso]);
