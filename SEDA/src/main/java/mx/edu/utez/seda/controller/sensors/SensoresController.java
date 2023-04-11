@@ -45,6 +45,15 @@ public class SensoresController {
                     HttpStatus.CREATED
             );
         }
+
+        @PutMapping("/{id}")
+        public ResponseEntity<Response<Sensores>>update(@PathVariable long id ,@RequestBody SensoresDto sensoresDto){
+            return new ResponseEntity<>(
+                    this.service.update(id,sensoresDto.getSensores()),
+                    HttpStatus.OK
+            );
+        }
+
         @DeleteMapping("/{id}")
         public ResponseEntity<Response<Sensores>>delete(@PathVariable long id ,@RequestBody SensoresDto sensoresDto){
             return new ResponseEntity<>(

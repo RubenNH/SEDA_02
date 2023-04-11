@@ -38,15 +38,15 @@ const Home1 = () => {
     }
   };
 
-  const cambiarEstadoElectronicos = async (id, status) => {
+  const cambiarEstadoElectronicos = async (id) => {
     try {
-      const response = await axios.put(`http://192.168.100.5:8080/api-seda/elect/${id}`, {
-        status: status
-      });
+      const response = await axios.put(`http://192.168.100.5:8080/api-seda/elect/${id}`, {});
       console.log('Item status updated successfully:', response.data);
     } catch (error) {
       console.error('Error updating item status:', error);
     }
+    Traerelectronicos();
+
   }
   useEffect(() => {
     Traerelectronicos();
@@ -76,13 +76,12 @@ const Home1 = () => {
     const newItems = items.map((item) => {
       if (item.idElectro === id) {
         item.status = !item.status;
+        cambiarEstadoElectronicos(item.idElectro);
         GuardarUsoElectro(item);
-        //cambiarEstadoElectronicos(item.idElectro, item.status)
         console.log(`Item with ID ${id} is now ${item.status ? 'on' : 'off'}`);
       }
       return item;
     });
-    Traerelectronicos();
   };
 
   const renderItem = ({ item }) => (

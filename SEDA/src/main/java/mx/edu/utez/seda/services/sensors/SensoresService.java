@@ -64,8 +64,8 @@ public class SensoresService {
     }
 
     @Transactional(rollbackFor = {SQLException.class})
-    public Response<Sensores> update(Sensores sensores){
-        if(this.repository.existsById(sensores.getIdSensor())){
+    public Response<Sensores> update(long id,Sensores sensores){
+        if(this.repository.existsById(id)){
             return new Response<>(
                     this.repository.saveAndFlush(sensores),
                     false,

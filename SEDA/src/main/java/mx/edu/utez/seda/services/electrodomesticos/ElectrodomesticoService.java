@@ -64,6 +64,46 @@ public class ElectrodomesticoService {
 
     }
 
+    //update
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Electrodomestico> update(long id, Electrodomestico electrodomestico){
+        if (this.repository.existsById(id)){
+            return new Response<>(
+                    this.repository.saveAndFlush(electrodomestico),
+                    false,
+                    200,
+                    "Electrodomestico actualizado correctamente"
+            );
+        }
+        return new Response<>(
+                null,
+                true,
+                400,
+                "El electrodomestico no se ha encontrado"
+        );
+    }
+
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Electrodomestico> changeStatus(Long id){
+        if (!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "La categoria no se encontro"
+            );
+        }
+        Electrodomestico category = this.repository.findById(id).get();
+        category.setStatus(!category.getStatus());
+        this.repository.saveAndFlush(category);
+        return new Response<>(
+                category,
+                false,
+                200,
+                "Categoria actualizada correctamente "
+        );
+    }
+
     @Transactional(rollbackFor = {SQLException.class})
     public Response<Electrodomestico> delete(Long id){
         Response response = null;
@@ -84,4 +124,6 @@ public class ElectrodomesticoService {
 
         return response;
     }
+
+
 }

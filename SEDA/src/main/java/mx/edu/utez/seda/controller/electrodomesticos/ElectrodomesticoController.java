@@ -43,6 +43,17 @@ public class ElectrodomesticoController {
                 HttpStatus.CREATED
         );
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Response<Electrodomestico>>update(@PathVariable long id ,@RequestBody ElectrodomesticoDto electrodomesticoDto){
+        return new ResponseEntity<>(
+                this.service.changeStatus(id),
+                //this.service.update(id,electrodomesticoDto.getElectrodomesticos()),
+                HttpStatus.OK
+        );
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Response<Electrodomestico>>delete(@PathVariable long id ,@RequestBody ElectrodomesticoDto electrodomesticoDto){
         return new ResponseEntity<>(
