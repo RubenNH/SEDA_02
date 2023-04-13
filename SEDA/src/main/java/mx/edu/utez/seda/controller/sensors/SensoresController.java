@@ -49,7 +49,8 @@ public class SensoresController {
         @PutMapping("/{id}")
         public ResponseEntity<Response<Sensores>>update(@PathVariable long id ,@RequestBody SensoresDto sensoresDto){
             return new ResponseEntity<>(
-                    this.service.update(id,sensoresDto.getSensores()),
+                    this.service.changeStatus(id),
+                    //this.service.update(id,sensoresDto.getSensores()),
                     HttpStatus.OK
             );
         }

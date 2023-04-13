@@ -9,7 +9,6 @@ INSERT INTO `seda`.`registros_electronicos` (`status`, `electrodomestico_id`) VA
 INSERT INTO `seda`.`registros_electronicos` (`status`, `electrodomestico_id`) VALUES (b'0', '2');
 
 
-
 Maqueta
 
 http://localhost:8080/api-seda/piso/

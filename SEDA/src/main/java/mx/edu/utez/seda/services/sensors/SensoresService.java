@@ -1,5 +1,6 @@
 package mx.edu.utez.seda.services.sensors;
 
+import mx.edu.utez.seda.model.electrodomesticos.Electrodomestico;
 import mx.edu.utez.seda.model.sensors.Sensores;
 import mx.edu.utez.seda.model.sensors.SensoresRepository;
 import mx.edu.utez.seda.utils.Response;
@@ -99,4 +100,26 @@ public class SensoresService {
                 "El sensor no se ha encontrado"
         );
     }
+
+    @Transactional(rollbackFor = {SQLException.class})
+    public Response<Sensores> changeStatus(Long id){
+        if (!this.repository.existsById(id)){
+            return new Response<>(
+                    null,
+                    true,
+                    400,
+                    "La categoria no se encontro"
+            );
+        }
+        Sensores category = this.repository.findById(id).get();
+        category.setStatus(!category.getStatus());
+        this.repository.saveAndFlush(category);
+        return new Response<>(
+                category,
+                false,
+                200,
+                "Categoria actualizada correctamente "
+        );
+    }
+
 }

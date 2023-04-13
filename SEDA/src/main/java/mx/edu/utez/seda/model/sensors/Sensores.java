@@ -28,7 +28,7 @@ public class Sensores {
     @Column(nullable = false,length = 50)
     private String nombreSensor;
     @Column(nullable = false)
-    private boolean status;
+    private Boolean status;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date HoraDeUso;
